@@ -40,34 +40,6 @@ ul {
     
 }
 
-
-.vid_lecture{
-    position: relative;
-    float: right;
-    margin-left: 45px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    margin-right: 10px;
-    padding-left: 20px;
-    padding-top: 15px;
-    align-content: center;
-    min-height: 155px;
-    min-width: 175px;
-    color: red;   
-    border-left: 1px solid #95c6e5;
-    
-}
-
-.vid_lecture_cover{
-    border: 3px solid white;
-    box-shadow: 3px 3px 5px #909090;
-    border-radius: 5px;
-}
-
-.vid_lecture_cover:hover{
-    border: 3px solid #b4e8ff;   
-}
-
 .courseMap {
     margin-top: 3px;
     font-style: italic;
