@@ -1,0 +1,316 @@
+
+
+
+
+table {
+ color: #294179;  /* gray-blue */    
+    
+}
+
+a:link {
+    color: #0566c6;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #086ed3;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #4998e5;
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 5px;
+    margin: 0px;
+}
+
+.middot{
+    font-size: 1.2em;
+    font-weight: bolder;
+    text-align: center;
+    
+}
+
+
+.vid_lecture{
+    position: relative;
+    float: right;
+    margin-left: 45px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 10px;
+    padding-left: 20px;
+    padding-top: 15px;
+    align-content: center;
+    min-height: 155px;
+    min-width: 175px;
+    color: red;   
+    border-left: 1px solid #95c6e5;
+    
+}
+
+.vid_lecture_cover{
+    border: 3px solid white;
+    box-shadow: 3px 3px 5px #909090;
+    border-radius: 5px;
+}
+
+.vid_lecture_cover:hover{
+    border: 3px solid #b4e8ff;   
+}
+
+.courseMap {
+    margin-top: 3px;
+    font-style: italic;
+    font-size: .8em;   
+}
+
+.CourseMap_Icon{
+    margin-right: 5px;
+    margin-left: 15px;
+    margin-top: 2px;
+    box-shadow: 1px 2px 1px #bcbcbc;
+    
+}
+
+/* for bulleted sub-lists (1st child lists) indented from left margin */
+
+.bulletsIn li {
+    list-style-type: disc;
+    padding: 0px;
+    margin-left: 25px;
+    
+}
+
+#legendNote {
+    color: #fa758f; 
+    font-size: .8em;
+    font-style: italic;
+}
+
+/* Non-linked items */
+
+.noContent{
+    color: #816b6b;
+    
+}
+
+
+
+.module_title{
+    color: #1e99b7;
+    font-family: Palatino, "Palatino Linotype", serif;
+    font-style: italic;
+    text-shadow: 1px 1px 1px #cecece;
+    
+}
+
+.week_module{
+    padding-top: 0px;
+    width: 300px;
+    min-width: 300px;
+}
+
+
+/* column vertical alignment, cols 2, 3, 4 */
+
+.topic_lecture{
+    vertical-align: text-top;
+    font-family: Palatino, "Palatino Linotype", serif;
+    line-height: 1.5em;
+    letter-spacing: .01em;
+    width: 400px;
+    min-width: 400px;
+}
+
+.other_reading{
+    vertical-align: text-top;
+    font-family: Palatino, "Palatino Linotype", serif;
+    font-size: .8em;
+    line-height: 1.5em;
+    letter-spacing: .01em;
+    width: 250px;
+    min-width: 250px;
+}
+
+.assignment{
+    vertical-align: text-top;
+    font-family: Ariel, sans-serif;
+    font-size: .8em;
+    line-height: 1.5em;
+    width: 150px;
+    min-width: 150px;
+}
+
+.module_topics_title{
+    margin-bottom: 2px;
+    font-style: normal;
+    font-weight: bold;
+    
+    
+}
+
+.module_topics{
+    vertical-align: text-top;
+    font-family: Palatino, "Palatino Linotype", serif;
+    font-size: .9em;
+    line-height: 1.4em;
+    letter-spacing: .01em;
+
+}
+
+
+.week_header{
+    font-size: .9em;
+    margin: 0px;
+    margin-bottom: 25px;
+    padding: 0px;
+    padding-bottom: 5px;
+    vertical-align: text-top;
+    font-family: Palatino, "Palatino Linotype", serif;
+    border-bottom: 1px solid #d6d6d6;
+   
+       
+}
+
+.week_header li{
+    display: inline;
+    
+}
+
+
+
+/* header row */
+
+#row0{
+    height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #294179; /* gray-blue */
+    color: blue;
+    font-size: 1.8em;
+    font-family: sans-serif;
+
+    
+}
+
+
+
+/* no class (no_meet) & holiday styles */
+
+.no_meet::before{
+    content: " NO CLASS: ";
+    color: red;
+    
+}
+
+.no_meet.holiday{
+    
+   
+    
+}
+
+
+
+/* ROW COLORS */
+
+    /* #FFCCCC; */ /* light red */
+    /* #FAF9C7; /* light yellow */
+    /* #E1EDFF; /* light blue */
+    /* #DDFCE2; /* light green */
+
+/* This color is for the dark blue header #294179 */
+#row0{
+    background-color: white; /* gray-blue */
+
+}
+
+
+/* This color is for the light blue rows #eef5ff */
+#row1{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+#row2{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+
+/* This color is for the white rows #ffffff */
+#row3{
+    background-color:  #eef5ff; /* med blue */
+    
+}
+
+#row4{
+    background-color: #ffffff; /* med blue */
+    
+}
+
+#row5{
+    background-color: #ffffff; /* light blue */
+    
+}
+
+#row6{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+#row7{
+    background-color: #eef5ff; /* med blue */ 
+    
+}
+
+#row8{
+    background-color: #ffffff; /* med blue */
+    
+}
+
+#row9{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+#row10{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+#row11{
+    background-color: #ffffff; /* med blue */
+    
+}
+
+#row12{
+    background-color: #ffffff; /* med blue */
+    
+}
+
+#row13{
+    background-color: #ffffff; /* med blue */
+    
+}
+
+#row14{
+    background-color: #eef5ff; /* light blue */
+    
+}
+
+/* END ROW COLORS */
+
+
+
+
+
