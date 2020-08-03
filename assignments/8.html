@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Type" content="text/html">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>CS 6200 | Information Retrieval</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+		integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+	</script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+		integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+	</script>
+
+	<link href="../assets/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	
+	<div id="main-content" class="container">
+		<div class="container">
+			<div class="row">
+			  <div class="col-md-12">
+				<div>
+				  <article id="content">
+					<h3 style="background-color: white; color: black;
+					  font-family: AppleGothic;"><big><big><big><small>CS6200
+	
+	
+	
+	
+	
+	
+	
+	
+	
+							  Information Retrieval<br>
+							</small> <small><font color="#3333ff">Homework8:
+	
+	
+	
+	
+								Clustering and Topic Models <br>
+							  </font></small></big></big></big></h3>
+					<hr>
+					<h1 id="objective">Objective</h1>
+					<p>In this assignment, you will cluster documents,
+					  detect topics, and represent documents in topic space.<br>
+					</p>
+					Data : We are using the AP89 collection. <br>
+					<br>
+					<h2 id="ec5_topic_models">A) Topic Models per Query<br>
+					</h2>
+					For any given query, select a set of documents that is
+					union of top 1000 BM25 docs (for that query) and the
+					qrel docs (for that query). The set will be a little
+					over 1000 docs since there will be considerable overlap.<br>
+					Then use one of the packages listed below to perform
+					LDA. Your output must contain <br>
+					<ul>
+					  <li>the topics detected, with each topic represented
+						as distribution over words (list the top 20-30
+						words)</li>
+					  <li>the documents represented as topic distribution.
+						Each document should have listed the most relevant
+						10 topics or so</li>
+					</ul>
+					Repeat the process for each one of the 25 queries.<br>
+					<h4><br>
+					</h4>
+					<h4></h4>
+					<h4>LDA option 1 : vowpal_wabbit(Bishwajeet) . Harder to
+					  use, but the best tool in practice for large data<br>
+					</h4>
+					1. On Ubuntu, vowpal_wabbit may be installed using the
+					following set of commands<br>
+					sudo apt-get install libboost-program-options-dev
+					zlib1g-dev<br>
+					sudo apt-get install libboost-python-dev<br>
+					git clone
+					git://github.com/JohnLangford/vowpal_wabbit.git<br>
+					cd vowpal_wabbit<br>
+					make<br>
+					make install #may require root previleges<br>
+					<br>
+					2. Input Data format for LDA<br>
+					1. The expected input format is<br>
+					| &lt;num-1&gt; &lt;num-2&gt; &lt;num-3&gt;<br>
+					| &lt;num-5&gt; &lt;num-2&gt;<br>
+					Each line corresponds to a document.<br>
+					<br>
+					Use your own hashing function to convert from word to a
+					number and make sure the <br>
+					word representation is consistent across the different
+					tuples of the input. In<br>
+					the above example, num-2 appears in both the documents
+					ie. the same word appears<br>
+					in both the documents. These words should be
+					consistently encoded into numbers<br>
+					<br>
+					3. Running the LDA<br>
+					The LDA may be invoked with the following commandline
+					args<br>
+					vw -d &lt;input-file-name&gt; --lda &lt;num-topics&gt;
+					--lda_D &lt;total-num-docs&gt; --passes 10&nbsp; -c -k
+					--readable_model &lt;model-file&gt;<br>
+					<br>
+					This will read from &lt;input-file-name&gt; and output
+					the readable model(ie. not binary) file to
+					&lt;model-file&gt;.<br>
+					The other command line options may be found here -
+	https://github.com/JohnLangford/vowpal_wabbit/wiki/Command-line-arguments<br>
+					<br>
+					4. Making sense of the readable model file<br>
+					The output format of the file is:<br>
+					1. The first 10 lines contain metadata. They need to be
+					ignored.<br>
+					2. From the 11th line onwards, all lines will contain
+					10(assuming you wanted 10 topics) floating point
+					numbers. Those are the topics.<br>
+					3. The line number tells you the number the word
+					represents(ie &lt;num-1&gt;, &lt;num-3&gt; etc)<br>
+					4. Sort each column and then print the word in the
+					following way.<br>
+					&nbsp; 4.1 Get the top 10 column values in column 0.
+					Note their indices.<br>
+					&nbsp; 4.2 Print them by spreading aross all the topics.
+					So<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Topic-0&nbsp;&nbsp;
+					Topic-1&nbsp; Topic-2 ..<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; col0-0&nbsp;&nbsp;&nbsp;
+					col0-1&nbsp;&nbsp; col0-2 .. <br>
+					&nbsp; 4.3 Do the above 2 steps for the required number
+					of topics.&nbsp;&nbsp;&nbsp; <br>
+					&nbsp; <br>
+					5. General Reference<br>
+					https://github.com/JohnLangford/vowpal_wabbit <br>
+					<br>
+					<h4><br>
+					</h4>
+					<h4>LDA option 2 : python sklearn (Nikhil)</h4>
+					1) Install scikit i.e. sklearn package for python<br>
+					<br>
+					2)Convert the Top set of documents for each query into
+					document-term matrix. You can use CountVectorizer from
+					sklearn.feature_extraction.text package<br>
+					It is good idea to restrict stop words, words with very
+					high document frequency and also words not occouring
+					more than say 1 or 2 time. These all can be passed in
+					CountVectorizer<br>
+					<br>
+					3)Train by fitting the sparse matrix obtained from above
+					to LatentDirichletAllocation from sklearn.decomposition.
+					This will fetch N topics with M features as word. Sort
+					features probability to get top K words.<br>
+					<br>
+					4)Transform the model to get distribution of topic over
+					documents. Sort them again and list top 3 topics per
+					document.<br>
+					Also fetch top 3 topics for each query by performing by
+					rank measure of topics or by checking for feature
+					occurrences in each document and sorting top 3 topic for
+					max score <br>
+					<!-- ### Deliverables
+	
+	1. Your group should submit a compressed file containing the TREC and WARC formatted files you crawled and the merged link graph from your individual crawls.
+	2. You should each submit the code for your own crawler. -->
+					<h3 id="rubric"><br>
+					</h3>
+					<h4>LDA option 3 : Python LDA (Rashmi) - easiest to use</h4>
+					<p>Python LDA : https://pypi.python.org/pypi/lda<br>
+					  The above link has the documentation for using the
+					  library assuming the dataset is already available as
+					  lda.datasets. <br>
+					  For custom datasets, we need to follow below steps:<br>
+					  1.&nbsp;&nbsp;&nbsp; Import numpy<br>
+					  2.&nbsp;&nbsp;&nbsp; Import lda<br>
+					  3.&nbsp;&nbsp;&nbsp; Convert the Top set of documents
+					  for each query into document-term matrix. This can be
+					  carried out using various python packages. For ex:
+					  textmining or nltk<br>
+					  4.&nbsp;&nbsp;&nbsp; Fit the document-term matrix to
+					  LDA<br>
+					  5.&nbsp;&nbsp;&nbsp; Model provides 2 probability
+					  distribution after computation<br>
+					  &nbsp;&nbsp;&nbsp; a.&nbsp;&nbsp;&nbsp; Topic – word
+					  probability distribution. Lookup with document-term
+					  matrix, the top 10-20 words will form the topic.<br>
+					  &nbsp;&nbsp;&nbsp; b.&nbsp;&nbsp;&nbsp; Document –
+					  topic probability distribution<br>
+					  <br>
+					</p>
+					<h4>LDA option 4 : Mallet (java)</h4>
+					<p><a href="http://mallet.cs.umass.edu/topics.php">http://mallet.cs.umass.edu/topics.php</a><br>
+					  <a href="http://programminghistorian.org/lessons/topic-modeling-and-mallet">http://programminghistorian.org/lessons/topic-modeling-and-mallet</a><br>
+					  <a href="https://piazza.com/class/io1w9cnmpk23i6?cid=195">https://piazza.com/class/io1w9cnmpk23i6?cid=195</a><br>
+					</p>
+					<br>
+					<h3 id="rubric">B) LDA-topics and clustering</h3>
+					<p>Run LDA on the entire AP89 collection, with about
+					  T=200 topics. Obtain a representation of all documents
+					  in these topics.<br>
+					  Then run a clustering-partition algorithm on documents
+					  in this topic representation. partition means every
+					  document gets assigned to exactly one cluster, like
+					  with K-means. You are free to use any clustering
+					  library/package. Target K=25 clusters. List each
+					  cluster with its documents IDs. You should have an ES
+					  index set up so we can look up documents by ID.</p>
+					<p>How to evaluate: There are about 1831 relevant
+					  documents in total. Consider all the pairs of two
+					  relevant documents, that is (1831 choose 2). For each
+					  pair, count a 1 in the appropriate cell of the
+					  following confusion table:<br>
+					</p>
+					<table height="64" border="1" cellpadding="2" cellspacing="2" width="473">
+					  <tbody>
+						<tr>
+						  <td valign="top"><br>
+						  </td>
+						  <td valign="top">&nbsp;same cluster<br>
+						  </td>
+						  <td valign="top">&nbsp;different clusters<br>
+						  </td>
+						</tr>
+						<tr>
+						  <td valign="top">&nbsp; same query<br>
+						  </td>
+						  <td valign="top"><br>
+						  </td>
+						  <td valign="top"><br>
+						  </td>
+						</tr>
+						<tr>
+						  <td valign="top">&nbsp;different queries<br>
+						  </td>
+						  <td valign="top"><br>
+						  </td>
+						  <td valign="top"><br>
+						  </td>
+						</tr>
+					  </tbody>
+					</table>
+					<p><br>
+					</p>
+					<h3 id="rubric">Rubric : OPtional, but can make up 50 points lost on HW1-7 <br>
+					</h3>
+					<dl class="dl-horizontal">
+					  <dt>7 points</dt>
+					  <dd>Set up the data per query<br>
+					  </dd>
+					  <dt>10 points</dt>
+					  <dd>Correctly set up and run LDA<br>
+					  </dd>
+					  <dt>10 points</dt>
+					  <dd>Get the output, both docs-&gt;topics and
+						topics-&gt;words probabilities/scores<br>
+					  </dd>
+					  <dt>8 points</dt>
+					  <dd>Analyze the result by manual inspection. Does the
+						docs-&gt;topics representation makes sense for the
+						relevant documents. Only need to check 5 docs/query
+						for a few queries</dd>
+					</dl>
+					<dl class="dl-horizontal">
+					  <dt>15 points</dt>
+					  <dd>part B<br>
+					  </dd>
+					</dl>
+					<dl class="dl-horizontal">
+					  <dt><br>
+					  </dt>
+					</dl>
+				  </article>
+				</div>
+			  </div>
+			</div>
+		  </div>
+	</div>
+	<footer>
+		<hr>
+		<center>
+			Ⓒ Northeastern University, 2020, all rights reserved<br><br>
+		</center>
+	</footer>
+</body>
+
+</html>
