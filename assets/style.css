@@ -332,4 +332,7 @@ li {
     margin-top: 5px;
 }
 
-/* Schedule */
+.nav-semester{
+    margin-right: 15px;
+    color: white;
+}
